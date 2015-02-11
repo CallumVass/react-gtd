@@ -1,6 +1,8 @@
 'use strict';
 
-var React = require('react');
+var React = require('react'),
+    ViewSelector = require("./ViewSelector")
+    ;
 
 module.exports = React.createClass({
 
@@ -10,10 +12,10 @@ module.exports = React.createClass({
         return (
             <div className="row">
                 <div className="col-sm-3">
-                    SIDEBAR
+                    <div>Hi</div>
                 </div>
                 <div className="col-sm-9">
-                    MAIN
+                    <ViewSelector />
                 </div>
             </div>
         );
