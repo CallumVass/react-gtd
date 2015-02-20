@@ -1,7 +1,6 @@
 'use strict';
 
 var React = require('react'),
-    Reflux = require("reflux"),
     Actions = require("./Actions")
     ;
 
@@ -23,7 +22,12 @@ module.exports = React.createClass({
     },
     handleSubmit: function (event) {
         event.preventDefault();
-        Actions.addTodo(this.refs.todoText.getDOMNode().value);
+
+        var text = this.refs.todoText.getDOMNode().value;
+        if(!text)
+            return;
+
+        Actions.addTodo(text);
         this.refs.todoText.getDOMNode().value = "";
     }
 });

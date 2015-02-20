@@ -1,31 +1,43 @@
 "use strict";
 
 var Reflux = require("reflux"),
-    Actions = require("./Actions")
+    Actions = require("./Actions"),
+    $ = require("jquery")
     ;
+
+var todos = [];
+var todo = {};
 
 module.exports = Reflux.createStore({
     init: function () {
         this.listenTo(Actions.addTodo, this.onAddTodo);
-        this.todos = [];
+        this.listenTo(Actions.getTodo, this.onGetTodo);
     },
     onAddTodo: function (text) {
-        this.todos.push({
-            id: this.todos.length + 1,
+
+        var todo = {
+            id: todos.length + 1,
             text: text
-        });
+        };
 
-        this.trigger(this.todos);
+        $.post("http://localhost:1234/todos", todo)
+            .done(function (data) {
+                todos.push(todo);
+            }.bind(this))
+            .fail(function (er) {
+                console.log(er);
+            })
+            .always(function () {
+                this.trigger(todos);
+            }.bind(this));
     },
-    getInitialState: function () {
-
-        if (this.todos.length < 1) {
-            this.todos = [{
-                id: 1,
-                text: "Learn Reflux and React"
-            }];
-        }
-
-        return this.todos;
+    getTodos: function () {
+        return todos;
+    },
+    onGetTodo: function (id) {
+        todo = todos[id - 1];
+        this.trigger(todo);
+        return todo;
     }
+
 });
