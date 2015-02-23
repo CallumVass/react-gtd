@@ -10,7 +10,7 @@ var React = require('react'),
 module.exports = React.createClass({
 
     displayName: 'TodoItem',
-    mixins: [Router.State],
+    mixins: [Router.State, Router.Navigation],
     getInitialState: function () {
         return {
             todo: TodoStore.getTodo(this.getParams().todoId)
@@ -27,7 +27,7 @@ module.exports = React.createClass({
         );
     },
     deleteTodo: function () {
-        // delete here
-        console.log("deleted");
+        Actions.deleteTodo(this.state.todo.id);
+        this.transitionTo('app');
     }
 });

@@ -10,10 +10,11 @@ var todos = [];
 module.exports = Reflux.createStore({
     init: function () {
         this.listenTo(Actions.addTodo, this.onAddTodo);
-        this.listenTo(Actions.editTodo, this.onEditTodo);
+        this.listenTo(Actions.deleteTodo, this.onDeleteTodo);
     },
-    onEditTodo: function(id) {
-
+    onDeleteTodo: function(id) {
+        todos.splice(id - 1, 1);
+        this.trigger(todos);
     },
     onAddTodo: function (text) {
 
