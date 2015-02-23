@@ -10,23 +10,17 @@ var React = require('react'),
 module.exports = React.createClass({
 
     displayName: 'TodoItem',
-    mixins: [Router.State, Reflux.connect(TodoStore, "todo")],
-    componentWillMount: function () {
-        this.setState({
-            todo: Actions.getTodo(this.getParams().todoId)
-        });
-    },
+    mixins: [Router.State],
     getInitialState: function () {
         return {
-            todo: {}
+            todo: TodoStore.getTodo(this.getParams().todoId)
         }
     },
     render: function () {
         return (
             <div className="row">
                 <div className="col-sm-12">
-                    <h2>{this.state.todo}</h2>
-
+                    <h2>{this.state.todo.text}</h2>
                     <button onClick={this.deleteTodo} className="btn btn-danger">Delete</button>
                 </div>
             </div>

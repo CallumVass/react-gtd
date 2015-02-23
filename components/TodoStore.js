@@ -35,5 +35,8 @@ module.exports = Reflux.createStore({
     },
     getTodos: function () {
         return todos;
+    },
+    getTodo: function(id) {
+        return todos[id - 1];
     }
 });
