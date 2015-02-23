@@ -6,12 +6,14 @@ var Reflux = require("reflux"),
     ;
 
 var todos = [];
-var todo = {};
 
 module.exports = Reflux.createStore({
     init: function () {
         this.listenTo(Actions.addTodo, this.onAddTodo);
-        this.listenTo(Actions.getTodo, this.onGetTodo);
+        this.listenTo(Actions.editTodo, this.onEditTodo);
+    },
+    onEditTodo: function(id) {
+
     },
     onAddTodo: function (text) {
 
@@ -33,11 +35,5 @@ module.exports = Reflux.createStore({
     },
     getTodos: function () {
         return todos;
-    },
-    onGetTodo: function (id) {
-        todo = todos[id - 1];
-        this.trigger(todo);
-        return todo;
     }
-
 });
