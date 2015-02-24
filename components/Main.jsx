@@ -13,19 +13,11 @@ module.exports = React.createClass({
     mixins: [Reflux.connect(TodoStore, "todos")],
     getInitialState: function () {
         return {
-            todos: TodoStore.getTodos()
+            todos: []
         }
     },
     componentDidMount: function () {
-        this.unsubscribe = TodoStore.listen(this.onChange);
-    },
-    componentWillUnmount: function () {
-        this.unsubscribe();
-    },
-    onChange: function (notes) {
-        this.setState({
-            notes: notes
-        });
+        TodoStore.getTodos();
     },
     render: function () {
 

@@ -12,20 +12,27 @@ module.exports = Reflux.createStore({
         this.listenTo(Actions.addTodo, this.onAddTodo);
         this.listenTo(Actions.deleteTodo, this.onDeleteTodo);
     },
-    onDeleteTodo: function(id) {
-        todos.splice(id - 1, 1);
-        this.trigger(todos);
+    onDeleteTodo: function (id) {
+        $.ajax({
+            url: "http://localhost:1234/todos/" + id,
+            type: "DELETE"
+        })
+            .fail(function (er) {
+                console.log(er);
+            })
+            .always(function () {
+                this.getTodos();
+            }.bind(this));
     },
     onAddTodo: function (text) {
 
         var todo = {
-            id: todos.length + 1,
             text: text
         };
 
         $.post("http://localhost:1234/todos", todo)
             .done(function (data) {
-                todos.push(todo);
+                todos.push(data);
             }.bind(this))
             .fail(function (er) {
                 console.log(er);
@@ -35,9 +42,18 @@ module.exports = Reflux.createStore({
             }.bind(this));
     },
     getTodos: function () {
-        return todos;
+        return $.getJSON("http://localhost:1234/todos")
+            .done(function (data) {
+                todos = data;
+            })
+            .fail(function (er) {
+                console.log(er);
+            })
+            .always(function () {
+                this.trigger(todos);
+            }.bind(this));
     },
-    getTodo: function(id) {
+    getTodo: function (id) {
         return todos[id - 1];
     }
 });
