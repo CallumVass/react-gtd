@@ -6,6 +6,7 @@ var Reflux = require("reflux"),
     ;
 
 var todos = [];
+var host = "http://cv-e6540:1234";
 
 module.exports = Reflux.createStore({
     init: function () {
@@ -14,7 +15,7 @@ module.exports = Reflux.createStore({
     },
     onDeleteTodo: function (id) {
         $.ajax({
-            url: "http://localhost:1234/todos/" + id,
+            url: host + "/todos/" + id,
             type: "DELETE"
         })
             .fail(function (er) {
@@ -30,7 +31,7 @@ module.exports = Reflux.createStore({
             text: text
         };
 
-        $.post("http://localhost:1234/todos", todo)
+        $.post(host + "/todos", todo)
             .done(function (data) {
                 todos.push(data);
             }.bind(this))
@@ -42,7 +43,7 @@ module.exports = Reflux.createStore({
             }.bind(this));
     },
     getTodos: function () {
-        return $.getJSON("http://localhost:1234/todos")
+        return $.getJSON(host + "/todos")
             .done(function (data) {
                 todos = data;
             })
