@@ -11,8 +11,9 @@ var Reflux = require("reflux"),
 
 module.exports = Reflux.createStore({
     init: function () {
-        this.listenTo(Actions.addTodo, this.onAddTodo);
-        this.listenTo(Actions.deleteTodo, this.onDeleteTodo);
+        this.listenToMany(Actions);
+        //this.listenTo(Actions.addTodo, this.onAddTodo);
+        //this.listenTo(Actions.deleteTodo, this.onDeleteTodo);
 
         setInterval(function () {
             this.getTodos()
