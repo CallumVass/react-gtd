@@ -9,6 +9,10 @@ module.exports = {
             {
                 test: /\.jsx$/,
                 loader: "jsx-loader?intertPragma=React.DOM"
+            },
+            {
+                test: /\.json$/,
+                loader: "json-loader"
             }
         ]
     },

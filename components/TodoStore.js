@@ -2,16 +2,20 @@
 
 var Reflux = require("reflux"),
     Actions = require("./Actions"),
-    $ = require("jquery")
+    $ = require("jquery"),
+    hostName = "http://cv-e6540",
+    todos = [],
+    host = hostName + ":1234"
     ;
-
-var todos = [];
-var host = "http://cv-e6540:1234";
 
 module.exports = Reflux.createStore({
     init: function () {
         this.listenTo(Actions.addTodo, this.onAddTodo);
         this.listenTo(Actions.deleteTodo, this.onDeleteTodo);
+
+        setInterval(function () {
+            this.getTodos()
+        }.bind(this), 1000);
     },
     onDeleteTodo: function (id) {
         $.ajax({
