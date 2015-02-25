@@ -3,6 +3,7 @@
 var Reflux = require("reflux"),
     Actions = require("./Actions"),
     $ = require("jquery"),
+    _ = require("lodash"),
     hostName = "http://cv-e6540",
     todos = [],
     host = hostName + ":1234"
@@ -59,6 +60,7 @@ module.exports = Reflux.createStore({
             }.bind(this));
     },
     getTodo: function (id) {
-        return todos[id - 1];
+        return _.find(todos, function(t) { return t.id == id; });
+
     }
 });
