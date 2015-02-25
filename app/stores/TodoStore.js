@@ -1,7 +1,7 @@
 "use strict";
 
 var Reflux = require("reflux"),
-    Actions = require("./Actions"),
+    Actions = require("./../actions/Actions"),
     $ = require("jquery"),
     _ = require("lodash"),
     hostName = "http://cv-e6540",
@@ -61,6 +61,5 @@ module.exports = Reflux.createStore({
     },
     getTodo: function (id) {
         return _.find(todos, function(t) { return t.id == id; });
-
     }
 });

@@ -6,8 +6,8 @@ var React = require("react"),
     Link = Router.Link,
     Route = Router.Route,
     RouteHandler = Router.RouteHandler,
-    Main = require("./Main"),
-    TodoItem = require("./TodoItem");
+    Main = require("./components/Main"),
+    TodoItem = require("./components/TodoItem");
 
 var App = React.createClass({
     displayName: "App",

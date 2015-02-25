@@ -3,7 +3,7 @@
 var React = require('react'),
     Reflux = require("reflux"),
     Link = require("react-router").Link,
-    TodoStore = require("./TodoStore"),
+    TodoStore = require("./../stores/TodoStore"),
     AddTodo = require("./AddTodo")
     ;
 

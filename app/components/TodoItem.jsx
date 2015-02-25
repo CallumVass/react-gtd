@@ -1,10 +1,9 @@
 'use strict';
 
 var React = require('react'),
-    Reflux = require("reflux"),
     Router = require("react-router"),
-    Actions = require("./Actions"),
-    TodoStore = require("./TodoStore")
+    Actions = require("./../actions/Actions"),
+    TodoStore = require("./../stores/TodoStore")
     ;
 
 module.exports = React.createClass({
