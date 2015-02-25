@@ -16,9 +16,6 @@ module.exports = React.createClass({
             todos: []
         }
     },
-    componentDidMount: function () {
-        TodoStore.getTodos();
-    },
     render: function () {
 
         var todos = this.state.todos.map(function (todo) {
